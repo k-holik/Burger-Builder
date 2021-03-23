@@ -1,6 +1,6 @@
 .BuildControls {
   width: 100%;
-  background-color: #cf8f2e;
+  background: linear-gradient(rgb(117, 136, 136), rgb(167, 189, 188));
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -9,6 +9,7 @@
   padding: 10px 0;
 }
 
+/*
 .OrderButton {
   background-color: #dad735;
   outline: none;
@@ -17,8 +18,8 @@
   color: #966909;
   font-family: inherit;
   font-size: 1.2em;
-  box-shadow: 2px 2px 2px #966909;
   padding: 15px 30px;
+  box-shadow: 2px 2px 2px #966909;
 }
 
 .OrderButton:hover,
@@ -40,12 +41,102 @@
   animation: enable 0.3s linear;
 }
 
+*/
+
+.OrderButton {
+  margin: 20px 0;
+  color: #fff;
+  border-radius: 5px;
+  padding: 15px 30px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  background: rgb(70, 106, 121);
+  background: linear-gradient(
+    0deg,
+    rgb(70, 106, 121) 0%,
+    rgb(109, 173, 236) 100%
+  );
+  width: 270px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}
+
+.OrderButton span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.OrderButton:before,
+.OrderButton:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  background: rgb(70, 106, 121);
+  transition: all 0.3s ease;
+}
+.OrderButton:before {
+  height: 0%;
+  width: 2px;
+}
+.OrderButton:after {
+  width: 0%;
+  height: 2px;
+}
+.OrderButton:hover {
+  background: transparent;
+  box-shadow: none;
+}
+.OrderButton:hover:before {
+  height: 100%;
+}
+.OrderButton:hover:after {
+  width: 100%;
+}
+.OrderButton span:hover {
+  color: rgb(70, 106, 121);
+}
+.OrderButton span:before,
+.OrderButton span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  background: rgb(70, 106, 121);
+  transition: all 0.3s ease;
+}
+.OrderButton span:before {
+  width: 2px;
+  height: 0%;
+}
+.OrderButton span:after {
+  width: 0%;
+  height: 2px;
+}
+.OrderButton span:hover:before {
+  height: 100%;
+}
+.OrderButton span:hover:after {
+  width: 100%;
+}
+
 @keyframes enable {
   0% {
     transform: scale(1);
   }
   60% {
-    transform: scale(1);
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);
