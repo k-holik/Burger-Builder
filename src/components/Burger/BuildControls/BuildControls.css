@@ -1,10 +1,10 @@
 .BuildControls {
   width: 100%;
-  background: linear-gradient(rgb(117, 136, 136), rgb(167, 189, 188));
+  background: url("../../../assets/images/fries.jpg"), black;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.9);
   display: flex;
   flex-flow: column;
   align-items: center;
-  box-shadow: 0 2px 1px #ccc;
   margin: auto;
   padding: 10px 0;
 }
@@ -46,7 +46,6 @@
 .OrderButton {
   margin: 20px 0;
   color: #fff;
-  border-radius: 5px;
   padding: 15px 30px;
   font-family: "Lato", sans-serif;
   font-weight: 500;
@@ -55,15 +54,8 @@
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   outline: none;
-  background: rgb(70, 106, 121);
-  background: linear-gradient(
-    0deg,
-    rgb(70, 106, 121) 0%,
-    rgb(109, 173, 236) 100%
-  );
+  background: linear-gradient(0deg, #f50000 0%, #a11616 100%);
   width: 270px;
   height: 40px;
   line-height: 42px;
@@ -83,7 +75,7 @@
   content: "";
   right: 0;
   top: 0;
-  background: rgb(70, 106, 121);
+  background: #f50000;
   transition: all 0.3s ease;
 }
 .OrderButton:before {
@@ -105,7 +97,7 @@
   width: 100%;
 }
 .OrderButton span:hover {
-  color: rgb(70, 106, 121);
+  color: #f50000;
 }
 .OrderButton span:before,
 .OrderButton span:after {
@@ -113,7 +105,7 @@
   content: "";
   left: 0;
   bottom: 0;
-  background: rgb(70, 106, 121);
+  background: #f50000;
   transition: all 0.3s ease;
 }
 .OrderButton span:before {
