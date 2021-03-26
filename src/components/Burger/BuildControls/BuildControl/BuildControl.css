@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 5px 0;
+  color: #fff;
 }
 
 .BuildControl button {
@@ -12,11 +13,7 @@
   margin: 0 5px;
   width: 80px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  outline: none;
-  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 
@@ -40,24 +37,24 @@
 }
 
 .BuildControl .Less {
-  background-color: rgb(70, 106, 121);
+  background-color: #a11616;
   color: white;
 }
 
 .BuildControl .More {
-  background-color: rgb(109, 173, 236);
+  background-color: #f50000;
   color: white;
 }
 
 .BuildControl .Less:hover,
 .BuildControl .Less:active {
-  background-color: rgb(86, 126, 143);
+  background-color: #ff2828;
   color: white;
 }
 
 .BuildControl .More:hover,
 .BuildControl .More:active {
-  background-color: rgb(131, 189, 248);
+  background-color: #ff3d3d;
   color: white;
 }
 

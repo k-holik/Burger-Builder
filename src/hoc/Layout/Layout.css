@@ -1,3 +1,5 @@
 .Content {
-  margin-top: 72px;
+  padding-top: 72px;
+  background-color: #ccc;
+  box-sizing: border-box;
 }
