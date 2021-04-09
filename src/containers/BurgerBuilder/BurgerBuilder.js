@@ -1,36 +1,24 @@
 import React, { Component } from "react";
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary.js";
-import axios from "../../axios-orders.js";
 import { connect } from "react-redux";
 
+import axios from "../../axios-orders";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls.js";
 import Modal from "../../components/UI/Modal/Modal.js";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary.js";
 import Spinner from "../../components/UI/Spinner/Spinner.js";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler.js";
-import * as actionTypes from "../../store/actions.js";
+import * as actions from "../../store/actions/index";
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
   state = {
     purchasing: false,
-    loading: false,
-    error: false,
   };
 
   componentDidMount() {
     //console.log(this.props);
-    /*
-    axios
-      .get(
-        "https://react-my-burger-df237-default-rtdb.europe-west1.firebasedatabase.app/ingredients.json"
-      )
-      .then((response) => {
-        this.setState({ ingredients: response.data });
-      })
-      .catch((error) => {
-        this.setState({ error: true });
-      });*/
+    this.props.onInitIngredients();
   }
 
   updatePurchaseState(ingredients) {
@@ -46,7 +34,11 @@ class BurgerBuilder extends Component {
   }
 
   purchaseHandler = () => {
-    this.setState({ purchasing: true });
+    if (this.props.isAuthenticated) this.setState({ purchasing: true });
+    else {
+      this.props.onSetAuthRedirectPath("/checkout");
+      this.props.history.push("/auth");
+    }
   };
 
   purchaseCancelHandler = () => {
@@ -54,6 +46,7 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
+    this.props.onInitPurchase();
     this.props.history.push("/checkout");
   };
 
@@ -68,7 +61,7 @@ class BurgerBuilder extends Component {
 
     // dokud nemam k dispozici data, tak tam nasadim spinner.. kdybych nepouzila tenhle check, vyhodi mi to error
     let orderSummary = null;
-    let burger = this.state.error ? (
+    let burger = this.props.error ? (
       <p>Ingredients can't be loaded...</p>
     ) : (
       <Spinner />
@@ -85,6 +78,7 @@ class BurgerBuilder extends Component {
             purchasable={this.updatePurchaseState(this.props.ings)}
             ordered={this.purchaseHandler}
             price={this.props.price}
+            isAuth={this.props.isAuthenticated}
           />
         </Auxiliary>
       );
@@ -119,20 +113,22 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ings: state.ingredients,
-    price: state.totalPrice,
+    ings: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
+    error: state.burgerBuilder.error,
+    isAuthenticated: state.auth.token !== null,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onIngredientAdded: (ingName) =>
-      dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName: ingName }),
+    onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
     onIngredientRemoved: (ingName) =>
-      dispatch({
-        type: actionTypes.REMOVE_INGREDIENT,
-        ingredientName: ingName,
-      }),
+      dispatch(actions.removeIngredient(ingName)),
+    onInitIngredients: () => dispatch(actions.initIngredients()),
+    onInitPurchase: () => dispatch(actions.purchaseInit()),
+    onSetAuthRedirectPath: (path) =>
+      dispatch(actions.setAuthRedirectPath(path)),
   };
 };
 
